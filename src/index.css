@@ -1,11 +1,16 @@
 body {
+  color: white;
  padding: 50px;
  /* background-color: green; */
- background-color: blue;
+ background-color: rgb(77, 77, 133);
  font-family: sans-serif;
+ 
 
 }
 
+ul {
+  /* list-style: none; */
+}
 
 .container{
  display:flex;

@@ -1,43 +1,81 @@
-import React, from 'react';
-
+import React, { Component } from 'react';
+import TaskList from './TaskList'
 
 class TodoList extends Component {
   constructor() {
     super();
     this.state = {
-      todos: [],
+      todo: [],
       currentToDo: "",
     }
   }
 
-handleChange = event => {
-  console.log(event.target.value);
+handleChange = (event) => {
+  // console.log(event.target.value);
 
+  // catching the event.target.value and placing that on thre currentToDo in state.
+
+  this.setState({
+    currentToDo: event.target.value,
+  })
 }
 
-addItem = event => {
+addItem = (event) => {
   event.preventDefault();
-  console.log("addItem Method fired");
+  // ... need to take the currentToDo on state and then add it into thre todos array to build out the todo list
+if (this.state.currentToDo !=="") {
+  this.setState({
+    todo: [...this.state.todo, this.state.currentToDo],
+    currentToDo: ""
+  })
+}
+  // console.log("addItem Method fired");
+}
+
+deleteItem = (index, event) => {
+  const result = this.state.todo.filter((todo, index) => index != event.target.id)
+
+  this.setState({
+    todo: result
+  })
 }
 
 render() {
-  return(
-    <div clasName="container">
+  return (
+    <div>
       <form onSubmit={this.addItem}>
-        <label htmlFor="taskName">Task Name:</label>
-        input onChange={this.handleChange} name="taskName" type="text" placeholder="Add ToDo Here!" />
+        <label htmlFor="taskname"> Task Name: </label>
+        <input onChange={this.handleChange} name="taskname" type='text' placeholder="Add ToDo Here!" />
         <button type="submit">Add Task</button>
-
       </form>
+      <TaskList todoArray={this.state.todo} deleteItem={this.deleteItem} />
     </div>
   )
 }
-
 }
 
 
-
 export default TodoList
+
+
+// render() {
+//   return(
+//     <div clasName="container">
+//       <form onSubmit={this.addItem}>
+//         <label htmlFor="taskName">Task Name:</label>
+//         input onChange={this.handleChange} name="taskName" type="text" placeholder="Add ToDo Here!" />
+//         <button type="submit">Add Task</button>
+
+//       </form>
+//     </div>
+//   )
+// }
+
+// }
+
+
+
+// export default TodoList
 
 
 // import React from 'react';
